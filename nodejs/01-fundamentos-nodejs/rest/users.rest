@@ -1,0 +1,11 @@
+@host= http://localhost:3333
+
+###
+POST {{host}}/users
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "johndoe@example.com"
+}
+
