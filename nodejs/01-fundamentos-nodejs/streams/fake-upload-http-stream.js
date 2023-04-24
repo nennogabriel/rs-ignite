@@ -1,4 +1,4 @@
-import { Readble } from "node:stream";
+import { Readable } from "node:stream";
 
 class OneToHundredStream extends Readable {
   index = 1;
@@ -7,7 +7,7 @@ class OneToHundredStream extends Readable {
     const i = this.index++;
 
     setTimeout(() => {
-      if (i > 100) {
+      if (i > 3) {
         this.push(null);
       } else {
         const buff = Buffer.from(String(i));
@@ -23,4 +23,10 @@ fetch("http://localhost:3334", {
   // headers: {
   //   "Content-Type": "application/octet-stream",
   // },
-});
+})
+  .then((response) => {
+    return response.text();
+  })
+  .then((text) => {
+    console.log(text);
+  });
