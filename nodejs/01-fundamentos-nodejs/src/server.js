@@ -1,6 +1,7 @@
 import http from "node:http";
 import { json } from "./middleares/json.js";
 import { Database } from "./database.js";
+import { randomUUID } from "node:crypto";
 
 const database = new Database();
 
@@ -16,7 +17,7 @@ const server = http.createServer(async (request, response) => {
   if (method === "POST" && url === "/users") {
     const { name, email } = request.body;
     users.push({
-      id: 1,
+      id: randomUUID(),
       name,
       email,
     });
