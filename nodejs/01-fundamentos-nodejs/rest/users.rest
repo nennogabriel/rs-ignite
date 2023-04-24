@@ -1,6 +1,9 @@
 @host= http://localhost:3333
 
 ###
+GET {{host}}/users
+
+###
 POST {{host}}/users
 Content-Type: application/json
 
