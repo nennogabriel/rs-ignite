@@ -1,7 +1,8 @@
 import http from "node:http";
 import { json } from "./middleares/json.js";
+import { Database } from "./database.js";
 
-const users = [];
+const database = new Database();
 
 const server = http.createServer(async (request, response) => {
   const { url, method } = request;
