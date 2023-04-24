@@ -7,8 +7,9 @@ export const routes = [
   {
     method: "GET",
     path: "/users",
-    handler: (request, response) => {
-      return response.setHeader("Content-Type", "application/json").end(JSON.stringify(users));
+    handler: async (request, response) => {
+      const users = await database.select("users");
+      return response.end(JSON.stringify(users));
     },
   },
   {
@@ -16,7 +17,7 @@ export const routes = [
     path: "/users",
     handler: (request, response) => {
       const { name, email } = request.body;
-      users.push({
+      database.insert("users", {
         id: randomUUID(),
         name,
         email,

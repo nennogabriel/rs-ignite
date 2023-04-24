@@ -20,7 +20,7 @@ export class Database {
   }
 
   insert(table, data) {
-    if (Array.isArray(this.#database[table])) {
+    if (!Array.isArray(this.#database[table])) {
       this.#database[table] = [];
     }
 
@@ -30,6 +30,7 @@ export class Database {
   }
 
   select(table) {
-    return this.#database[table] ?? [];
+    const data = this.#database[table] ?? [];
+    return data;
   }
 }

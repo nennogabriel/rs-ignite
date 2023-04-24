@@ -1,15 +1,14 @@
 import http from "node:http";
 import { json } from "./middleares/json.js";
-
-const database = new Database();
+import { routes } from "./routes.js";
 
 const server = http.createServer(async (request, response) => {
   const { url, method } = request;
 
   await json(request, response, () => {});
 
-  const route = routes.find((route) => {
-    return route.method === method && route.path === url;
+  const route = routes.find((r) => {
+    return r.method === method && r.path === url;
   });
 
   if (route) {
