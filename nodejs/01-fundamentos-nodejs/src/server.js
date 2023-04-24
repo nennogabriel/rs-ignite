@@ -1,7 +1,5 @@
 import http from "node:http";
 import { json } from "./middleares/json.js";
-import { Database } from "./database.js";
-import { randomUUID } from "node:crypto";
 
 const database = new Database();
 
@@ -10,19 +8,12 @@ const server = http.createServer(async (request, response) => {
 
   await json(request, response, () => {});
 
-  if (method === "GET" && url === "/users") {
-    return response.setHeader("Content-Type", "application/json").end(JSON.stringify(users));
-  }
+  const route = routes.find((route) => {
+    return route.method === method && route.path === url;
+  });
 
-  if (method === "POST" && url === "/users") {
-    const { name, email } = request.body;
-    users.push({
-      id: randomUUID(),
-      name,
-      email,
-    });
-
-    return response.writeHead(201).end();
+  if (route) {
+    return route.handler(request, response);
   }
 
   response.writeHead(404).end();
