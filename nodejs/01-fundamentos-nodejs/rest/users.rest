@@ -4,6 +4,9 @@
 GET {{host}}/users
 
 ###
+GET {{host}}/users?search=Moe
+
+###
 POST {{host}}/users
 Content-Type: application/json
 
