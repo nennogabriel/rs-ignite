@@ -12,3 +12,6 @@ Content-Type: application/json
   "email": "johndoe@example.com"
 }
 
+
+###
+DELETE {{host}}/users/64fcccac-df86-42a0-baf2-beb541151089
