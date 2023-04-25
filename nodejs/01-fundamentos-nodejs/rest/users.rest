@@ -12,6 +12,16 @@ Content-Type: application/json
   "email": "johndoe@example.com"
 }
 
+###
+PUT {{host}}/users/4621dd34-16a3-4f3e-9e6d-8bbc2262afe7
+Content-Type: application/json
+
+{
+  "name": "John Moe",
+  "email": "johnMoe@example.com"
+}
+
+
 
 ###
 DELETE {{host}}/users/64fcccac-df86-42a0-baf2-beb541151089
