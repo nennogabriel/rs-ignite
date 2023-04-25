@@ -26,4 +26,11 @@ export const routes = [
       return response.writeHead(201).end();
     },
   },
+  {
+    method: "DELETE",
+    path: "/users/ID",
+    handler: (request, response) => {
+      return response.writeHead(204).end();
+    },
+  },
 ];
