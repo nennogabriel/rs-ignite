@@ -1,0 +1,44 @@
+@host=http://localhost:3333
+
+###
+POST {{host}}/tasks
+Content-Type: application/json
+
+{
+  "title": "Task 1",
+  "description": "Aquela que é a primeira tarefa"
+}
+
+### 
+GET {{host}}/tasks
+
+### 
+GET {{host}}/tasks?search=primeira
+
+
+### 
+PATCH {{host}}/tasks/748dd766-b6a6-4512-9e89-d4cf3eed3a58/complete
+
+### 
+PUT {{host}}/tasks/748dd766-b6a6-4512-9e89-d4cf3eed3a58
+Content-Type: application/json
+
+{
+  "title": "Task 1",
+  "description": "Aquela que é a primeira tarefa"
+}
+
+###
+POST {{host}}/tasks/importCSV
+
+###  todo: add file from a multipart/form-data
+POST {{host}}/tasks/importCSV
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="tasks.csv"
+Content-Type: text/csv
+
+< ./tasks.csv
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
