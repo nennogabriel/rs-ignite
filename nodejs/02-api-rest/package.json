@@ -2,9 +2,10 @@
   "name": "02-api-rest",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server.ts",            
   "scripts": {
     "dev": "tsx watch src/server.ts",
+    "knex": "node --trace-warnings --loader tsx ./node_modules/.bin/knex",
     "lint": "eslint --ext .ts src --fix"
   },
   "keywords": [],
