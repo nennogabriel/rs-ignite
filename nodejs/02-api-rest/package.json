@@ -2,7 +2,7 @@
   "name": "02-api-rest",
   "version": "1.0.0",
   "description": "",
-  "main": "src/server.ts",            
+  "main": "src/server.ts",
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "knex": "node --trace-warnings --loader tsx ./node_modules/.bin/knex",
@@ -19,6 +19,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
+    "dotenv": "^16.0.3",
     "fastify": "^4.16.3",
     "knex": "^2.4.2",
     "sqlite3": "^5.1.6"
