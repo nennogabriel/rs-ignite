@@ -1,0 +1,7 @@
+@host=http://localhost:3333
+
+
+###
+GET {{host}}/hello
+
+###
