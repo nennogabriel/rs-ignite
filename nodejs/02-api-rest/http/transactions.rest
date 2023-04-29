@@ -9,3 +9,11 @@ Content-Type: application/json
   "amount": 3000,
   "type": "credit"
 }
+
+###
+GET {{host}}/transactions
+Content-Type: application/json
+
+###
+GET {{host}}/transactions/ed01f487-af2d-435d-9668-aed6e4091904
+Content-Type: application/json
