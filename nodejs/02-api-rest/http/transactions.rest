@@ -1,0 +1,11 @@
+@host=http://localhost:3333
+
+###
+POST {{host}}/transactions
+Content-Type: application/json
+
+{
+  "title": "Salário",
+  "amount": 3000,
+  "type": "credit"
+}
