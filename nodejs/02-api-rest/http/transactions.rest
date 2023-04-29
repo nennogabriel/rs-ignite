@@ -11,6 +11,17 @@ Content-Type: application/json
 }
 
 ###
+POST {{host}}/transactions
+Content-Type: application/json
+
+{
+  "title": "Comi a galinha mais cara do mundo",
+  "amount": 1500,
+  "type": "debit"
+}
+
+
+###
 GET {{host}}/transactions
 Content-Type: application/json
 
@@ -19,3 +30,5 @@ GET {{host}}/transactions/ed01f487-af2d-435d-9668-aed6e4091904
 Content-Type: application/json
 
 ###
+GET {{host}}/transactions/summary
+Content-Type: application/json
