@@ -11,7 +11,7 @@ describe('Transactions Routes', () => {
     await app.close()
   })
 
-  it('should be able to create a new transaction', async () => {
+  it.only('should be able to create a new transaction', async () => {
     await request(app.server)
       .post('/transactions')
       .send({
@@ -20,5 +20,9 @@ describe('Transactions Routes', () => {
         type: 'credit',
       })
       .expect(201)
+  })
+
+  it('should be able to list the transactions', async () => {
+    await request(app.server).get('/transactions').expect(200)
   })
 })
