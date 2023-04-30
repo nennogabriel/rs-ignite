@@ -1,7 +1,17 @@
+# dependecies
 node_modules
-tmp
-db
+
+# databade
+db/*.sqlite
+
+# enviroment
 .env.test
 .env.development
 .env.production
 .env
+
+# production
+build
+
+# temporary
+tmp
