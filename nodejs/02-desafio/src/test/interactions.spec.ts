@@ -70,13 +70,11 @@ describe('App Routes', () => {
 
       const cookies = createEaterResponse.headers['set-cookie']
       const eater = createEaterResponse.body.eater[0]
-      const mealUUID = randomUUID()
 
       const createMealResponse = await request(app.server)
       .post('/meals')
       .set('Cookie', cookies)
       .send({
-        id: mealUUID,
         name: 'Big Mac',
         description: 'Dois hamburgueres, alface, queijo, molho especial, cebola e picles num pão com gergelim.',
         date: new Date().toISOString(),
@@ -84,25 +82,60 @@ describe('App Routes', () => {
         eater_id: eater.id,
       })
 
+      const meal = createMealResponse.body.meal[0]
 
+      const updatedDate = new Date().toISOString()
       const changeMealResponse = await request(app.server)
-        .put(`/meals/${mealUUID}`)
+        .put(`/meals/${meal.id}`)
         .set('Cookie', cookies)
         .send({
           name: 'Salada',
           description: 'alface, tomate e molho especial',
-          date: new Date().toISOString(),
+          date: updatedDate,
           is_on_diet: true,
-        })
+        }).expect(200)
 
-        expect(changeMealResponse.body.meal).toEqual(
-          expect.objectContaining({
+      expect(changeMealResponse.body).toEqual(
+        expect.objectContaining({
+          meal: expect.objectContaining({
             name: 'Salada',
             description: 'alface, tomate e molho especial',
-            is_on_diet: true,
+            date: updatedDate,
+            is_on_diet: 1,
           })
-        )
+        })
+      )
+    })
+    it('should be able to DELETE a meal', async () => {
+      const createEaterResponse = await request(app.server)
+        .post('/eaters')
+        .send({
+          name: 'Joaquim',
+          username: 'joaquim',
+        })
+
+      const cookies = createEaterResponse.headers['set-cookie']
+      const eater = createEaterResponse.body.eater[0]
+
+      const createMealResponse = await request(app.server)
+      .post('/meals')
+      .set('Cookie', cookies)
+      .send({
+        name: 'Big Mac',
+        description: 'Dois hamburgueres, alface, queijo, molho especial, cebola e picles num pão com gergelim.',
+        date: new Date().toISOString(),
+        is_on_diet: false,
+        eater_id: eater.id,
+      })
+
+      const meal = createMealResponse.body.meal[0]
+
+      await request(app.server)
+        .delete(`/meals/${meal.id}`)
+        .set('Cookie', cookies)
+        .expect(204)
 
     })
+
   })
 })

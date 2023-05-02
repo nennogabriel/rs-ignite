@@ -7,8 +7,8 @@
     - [X] Descrição
     - [X] Data e Hora
     - [X] Está dentro ou não da dieta
-  - [ ] Deve ser possível editar uma refeição , podendo alterar todos os dados acima
-  - [ ] Deve ser possível apagar uma refeição
+  - [X] Deve ser possível editar uma refeição , podendo alterar todos os dados acima
+  - [X] Deve ser possível apagar uma refeição
   - [ ] Deve ser possivel listar todas as refeições feitas
   - [ ] Deve ser possível recuperar as métricas de um usuário:
     - [ ] Quantidade de refeições feitas

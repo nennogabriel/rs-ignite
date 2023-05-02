@@ -27,15 +27,15 @@ export async function mealsRoutes(app: FastifyInstance) {
 
     const {id: easterId} = request.eater
 
-    await knex('meals').insert({
+    const meal = await knex('meals').insert({
       id: randomUUID(),
       name,
       description,
       date,
       is_on_diet,
       eater_id: easterId,
-    })
-    return reply.status(201).send()
+    }).returning('*')
+    return reply.status(201).send({meal})
   })
 
   app.put('/:id', async (request, reply) => {
@@ -45,11 +45,12 @@ export async function mealsRoutes(app: FastifyInstance) {
     const changeMealSchema = z.object({
       name: z.string().min(1).max(255),
       description: z.string().min(1),
+      date: z.string().datetime(),
       is_on_diet: z.boolean(),
     })
     const { id } = changeMealParamsSchema.parse(request.params)
 
-    const { name, description, is_on_diet } = changeMealSchema.parse(request.body)
+    const { name, description, date, is_on_diet } = changeMealSchema.parse(request.body)
 
     const {id: easterId} = request.eater
 
@@ -57,29 +58,34 @@ export async function mealsRoutes(app: FastifyInstance) {
     const updatedMeal = await knex('meals')
       .where({
         id,
+        eater_id: easterId,
       })
       .update({
         name,
         description,
+        date,
         is_on_diet,
       })
       .returning('*')
+    return reply.status(200).send({ meal: updatedMeal[0] })
+  })
 
-    console.log("🚀 ~ file: meals.ts:65 ~ app.put ~ updatedMeal:", updatedMeal)
-    return reply.status(20).send({meal: {
-      name,
-      description,
-      is_on_diet,
-    }})
+  app.delete('/:id', async (request, reply) => {
+    const changeMealParamsSchema = z.object({
+      id: z.string().uuid(),
+    })
 
-    // await knex('meals').insert({
-    //   id: randomUUID(),
-    //   name,
-    //   description,
-    //   date,
-    //   is_on_diet,
-    //   eater_id: easterId,
-    // })
-    // return reply.status(201).send()
+    const { id } = changeMealParamsSchema.parse(request.params)
+    const {id: easterId} = request.eater
+
+    // delete meals data with same id
+    await knex('meals')
+      .where({
+        id,
+        eater_id: easterId,
+      })
+      .del()
+
+    return reply.status(204).send()
   })
 }
