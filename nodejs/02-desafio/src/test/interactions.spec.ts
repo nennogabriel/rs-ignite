@@ -60,7 +60,7 @@ describe('App Routes', () => {
         .expect(201)
     })
 
-    it('should be able to register a meal', async () => {
+    it('should be able to update a meal', async () => {
       const createEaterResponse = await request(app.server)
         .post('/eaters')
         .send({
@@ -76,7 +76,7 @@ describe('App Routes', () => {
       .post('/meals')
       .set('Cookie', cookies)
       .send({
-        id: randomUUID(),
+        id: mealUUID,
         name: 'Big Mac',
         description: 'Dois hamburgueres, alface, queijo, molho especial, cebola e picles num pão com gergelim.',
         date: new Date().toISOString(),
