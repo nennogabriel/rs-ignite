@@ -95,4 +95,38 @@ export async function mealsRoutes(app: FastifyInstance) {
 
     return reply.status(204).send()
   })
+
+  app.get('/metrics', async (request, reply) => {
+    const {id: easterId} = request.eater
+
+    // make a query to get all meals from the same eater
+    // to generate the metrics how many meals are on diet and how many are not
+    const meals = await knex('meals')
+      .where({
+        eater_id: easterId,
+      })
+      .select('*')
+
+    const totalMeals = meals.length
+    const totalMealsOnDiet = meals.filter((meal) => meal.is_on_diet).length
+    const totalMealsNotOnDiet = meals.filter((meal) => !meal.is_on_diet).length
+    // return the best sequence os days on diet
+    const bestSequence = meals.reduce((acc, meal) => {
+      if (meal.is_on_diet) {
+        acc += 1
+      } else {
+        acc = 0
+      }
+      return acc
+    }, 0)
+
+    return {
+      metrics: {
+        totalMeals,
+        totalMealsOnDiet,
+        totalMealsNotOnDiet,
+        bestSequence,
+      }
+    }
+  })
 }

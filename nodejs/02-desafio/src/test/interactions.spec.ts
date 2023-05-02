@@ -164,5 +164,64 @@ describe('App Routes', () => {
       .set('Cookie', cookies)
       .expect(200)
     })
+
+    it('should be able to GET ALL METRICS of an eater', async () => {
+      const createEaterResponse = await request(app.server)
+        .post('/eaters')
+        .send({
+          name: 'Joaquim',
+          username: 'joaquim',
+        })
+
+      const cookies = createEaterResponse.headers['set-cookie']
+      const eater = createEaterResponse.body.eater[0]
+
+      const createMealResponse = await request(app.server)
+      .post('/meals')
+      .set('Cookie', cookies)
+      .send({
+        name: 'Big Mac',
+        description: 'Dois hamburgueres, alface, queijo, molho especial, cebola e picles num pão com gergelim.',
+        date: new Date().toISOString(),
+        is_on_diet: false,
+        eater_id: eater.id,
+      })
+
+      const createMealResponse2 = await request(app.server)
+      .post('/meals')
+      .set('Cookie', cookies)
+      .send({
+        name: 'Salada',
+        description: 'Alface, tomate e molho especial.',
+        date: new Date().toISOString(),
+        is_on_diet: true,
+        eater_id: eater.id,
+      })
+
+      const createMealResponse3 = await request(app.server)
+      .post('/meals')
+      .set('Cookie', cookies)
+      .send({
+        name: 'Salada',
+        description: 'Alface, tomate e molho especial.',
+        date: new Date().toISOString(),
+        is_on_diet: true,
+        eater_id: eater.id,
+      })
+
+      const metricsResponse = await request(app.server)
+      .get('/meals/metrics')
+      .set('Cookie', cookies)
+      .expect(200)
+
+      expect(metricsResponse.body.metrics).toEqual(
+        {
+          totalMeals: 3,
+          totalMealsOnDiet: 2,
+          totalMealsNotOnDiet: 1,
+          bestSequence: 2
+        }
+      )
+    })
   })
 })
