@@ -21,7 +21,7 @@ describe('Transactions Routes', () => {
     await request(app.server)
       .post('/transactions')
       .send({
-        title: 'New transcation',
+        title: 'New transaction',
         amount: 5000,
         type: 'credit',
       })
@@ -29,15 +29,15 @@ describe('Transactions Routes', () => {
   })
 
   it('should be able to list the transactions', async () => {
-    const createTrasnactionResponse = await request(app.server)
+    const createTransactionsResponse = await request(app.server)
       .post('/transactions')
       .send({
-        title: 'New transcation',
+        title: 'New transaction',
         amount: 5000,
         type: 'credit',
       })
 
-    const cookies = createTrasnactionResponse.headers['set-cookie']
+    const cookies = createTransactionsResponse.headers['set-cookie']
 
     const listTransactionsResponse = await request(app.server)
       .get('/transactions')
@@ -46,21 +46,21 @@ describe('Transactions Routes', () => {
 
     expect(listTransactionsResponse.body.transactions).toEqual([
       expect.objectContaining({
-        title: 'New transcation',
+        title: 'New transaction',
         amount: 5000,
       }),
     ])
   })
   it('should be able to get a specific transaction', async () => {
-    const createTrasnactionResponse = await request(app.server)
+    const createTransactionsResponse = await request(app.server)
       .post('/transactions')
       .send({
-        title: 'New transcation',
+        title: 'New transaction',
         amount: 5000,
         type: 'credit',
       })
 
-    const cookies = createTrasnactionResponse.headers['set-cookie']
+    const cookies = createTransactionsResponse.headers['set-cookie']
 
     const listTransactionsResponse = await request(app.server)
       .get('/transactions')
@@ -76,28 +76,28 @@ describe('Transactions Routes', () => {
 
     expect(getTransactionResponse.body.transaction).toEqual(
       expect.objectContaining({
-        title: 'New transcation',
+        title: 'New transaction',
         amount: 5000,
       }),
     )
   })
 
   it('should be able to get the sum', async () => {
-    const createCreditTrasnactionResponse = await request(app.server)
+    const createTransactionsResponse = await request(app.server)
       .post('/transactions')
       .send({
-        title: 'New transcation',
+        title: 'New transaction',
         amount: 5000,
         type: 'credit',
       })
 
-    const cookies = createCreditTrasnactionResponse.headers['set-cookie']
+    const cookies = createTransactionsResponse.headers['set-cookie']
 
     await request(app.server)
       .post('/transactions')
       .set('Cookie', cookies)
       .send({
-        title: 'New transcation',
+        title: 'New transaction',
         amount: 2000,
         type: 'debit',
       })

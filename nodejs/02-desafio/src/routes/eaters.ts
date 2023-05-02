@@ -15,6 +15,7 @@ export async function eatersRoutes(app: FastifyInstance) {
       name: z.string().min(1).max(255),
       username: z.string().min(1).max(50),
     })
+
     let sessionId = request.cookies.sessionId
     if (!sessionId) {
       sessionId = randomUUID()
@@ -23,15 +24,19 @@ export async function eatersRoutes(app: FastifyInstance) {
         maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
       })
     }
+
+
     const { name, username } = createEaterSchema.parse(request.body)
 
-    await knex('eaters').insert({
+    const eater = await knex('eaters').insert({
       id: randomUUID(),
       name,
       username,
       session_id: sessionId,
-    })
-    return reply.status(201).send()
+    }).returning('*')
+
+    // reply.headers
+    return reply.status(201).send({eater})
 
   })
 

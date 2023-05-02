@@ -1,12 +1,12 @@
 
 # RF
   - [X] Deve ser possível criar um usuário com username
-  - [ ] Deve ser possível Identificar o usuário entre as requisições
-  - [ ] Deve ser possível registrar uma refeição feita com as seguintes informações:
-    - [ ] Nome da refeição
-    - [ ] Descrição
-    - [ ] Data e Hora
-    - [ ] Está dentro ou não da dieta
+  - [X] Deve ser possível Identificar o usuário entre as requisições
+  - [X] Deve ser possível registrar uma refeição feita com as seguintes informações:
+    - [X] Nome da refeição
+    - [X] Descrição
+    - [X] Data e Hora
+    - [X] Está dentro ou não da dieta
   - [ ] Deve ser possível editar uma refeição , podendo alterar todos os dados acima
   - [ ] Deve ser possível apagar uma refeição
   - [ ] Deve ser possivel listar todas as refeições feitas
