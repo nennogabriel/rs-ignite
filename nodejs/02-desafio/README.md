@@ -9,7 +9,7 @@
     - [X] Está dentro ou não da dieta
   - [X] Deve ser possível editar uma refeição , podendo alterar todos os dados acima
   - [X] Deve ser possível apagar uma refeição
-  - [ ] Deve ser possivel listar todas as refeições feitas
+  - [X] Deve ser possivel listar todas as refeições feitas
   - [ ] Deve ser possível recuperar as métricas de um usuário:
     - [ ] Quantidade de refeições feitas
     - [ ] Quantidade de refeições feitas dentro da dieta

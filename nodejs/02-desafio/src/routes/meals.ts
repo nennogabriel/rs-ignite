@@ -10,8 +10,15 @@ export async function mealsRoutes(app: FastifyInstance) {
 
   app.addHook('preHandler', checkSessionIdExists)
 
-  app.get('/', async () => {
-    return { hello: 'world' }
+  app.get('/', async (request) => {
+    const {id: easterId} = request.eater
+    const meals = await knex('meals')
+      .where({
+        eater_id: easterId,
+      })
+      .select('*')
+
+    return { meals }
   })
 
   app.post('/', async (request, reply) => {

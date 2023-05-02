@@ -106,6 +106,7 @@ describe('App Routes', () => {
         })
       )
     })
+
     it('should be able to DELETE a meal', async () => {
       const createEaterResponse = await request(app.server)
         .post('/eaters')
@@ -134,8 +135,34 @@ describe('App Routes', () => {
         .delete(`/meals/${meal.id}`)
         .set('Cookie', cookies)
         .expect(204)
-
     })
 
+    it('should be able to GET ALL meal', async () => {
+      const createEaterResponse = await request(app.server)
+        .post('/eaters')
+        .send({
+          name: 'Joaquim',
+          username: 'joaquim',
+        })
+
+      const cookies = createEaterResponse.headers['set-cookie']
+      const eater = createEaterResponse.body.eater[0]
+
+      const createMealResponse = await request(app.server)
+      .post('/meals')
+      .set('Cookie', cookies)
+      .send({
+        name: 'Big Mac',
+        description: 'Dois hamburgueres, alface, queijo, molho especial, cebola e picles num pão com gergelim.',
+        date: new Date().toISOString(),
+        is_on_diet: false,
+        eater_id: eater.id,
+      })
+
+      await request(app.server)
+      .get('/meals')
+      .set('Cookie', cookies)
+      .expect(200)
+    })
   })
 })
