@@ -1,0 +1,13 @@
+
+version: "3"
+
+services:
+  api-soid-pg:
+    image: bitnami/postgresql
+    restart: always
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: soid
+    ports:
+      - 5432:5432
