@@ -1,0 +1,36 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Ignite: nodejs: projeto 03",
+    "dateExported": "2023-05-03T21:06:29.023Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "6b7cab7b-44aa-42d6-8622-ef50de97a7c6",
+            "name": "Users",
+            "containerId": "",
+            "created": "2023-05-03T19:45:30.496Z",
+            "sortNum": 10000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "c044f79b-9dcc-4da8-b36a-6f79ba7dd082",
+            "colId": "9f59d369-b6a4-4df3-86db-fd985987a6c1",
+            "containerId": "6b7cab7b-44aa-42d6-8622-ef50de97a7c6",
+            "name": "create user",
+            "url": "{{host}}{{port}}/users",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-05-03T19:45:13.124Z",
+            "modified": "2023-05-03T19:55:12.806Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Pedro Moreno\",\n  \"email\": \"pepe2@example.com\",\n  \"password\": \"tomorowPass\"\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}
