@@ -1,7 +1,7 @@
 import { UsersRepository } from "@/repositories/users-repository"
 import { hash } from "bcryptjs"
 import { UserAlreadyExistsError } from "./errors/user-already-exists"
-import { User } from "@prisma/client"
+import { UserDTO } from "@/repositories/dtos/user-dto"
 
 interface RegisterUseCaseRequest {
   name: string
@@ -10,7 +10,7 @@ interface RegisterUseCaseRequest {
 }
 
 interface RegisterUseCaseResponse {
-  user: User
+  user: UserDTO
 }
 
 export class RegisterUseCase {
