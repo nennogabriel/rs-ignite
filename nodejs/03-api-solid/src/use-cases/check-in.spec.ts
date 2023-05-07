@@ -3,6 +3,8 @@ import { InMemoryCheckInsRepository } from "@/repositories/in-memory/in-memory-c
 import { CheckInUseCase } from "./check-in"
 import { InMemoryGymsRepository } from "@/repositories/in-memory/in-memory-gyms-repository"
 import { Decimal } from "@prisma/client/runtime/library"
+import { MaxDistanceError } from "./errors/max-distance-error"
+import { MaxNumberOfCheckInsError } from "./errors/max-numbers-of-check-ins"
 
 let checkInRepository: InMemoryCheckInsRepository
 let gymsRepository: InMemoryGymsRepository
@@ -10,13 +12,13 @@ let sut: CheckInUseCase
 
 describe("Authenticate Use Case",  () => {
 
-  beforeEach(() => {
+  beforeEach(async () => {
     checkInRepository = new InMemoryCheckInsRepository()
     gymsRepository = new InMemoryGymsRepository()
     sut = new CheckInUseCase(checkInRepository, gymsRepository)
 
-    gymsRepository.items.push({
-      id: "gym-01",
+
+    await gymsRepository.create({
       title: "Gym 01",
       description: "",
       phone: "",
@@ -35,7 +37,7 @@ describe("Authenticate Use Case",  () => {
   it("should be able to check in", async () => {
     vi.setSystemTime(new Date("2021-01-01 10:00:00"))
     const data = {
-      gymId: "gym-01",
+      gymId: "1",
       userId: "user-01",
       userLatitude: -20.66929,
       userLongitude: -40.49702
@@ -50,7 +52,7 @@ describe("Authenticate Use Case",  () => {
     vi.setSystemTime(new Date("2021-01-01 10:00:00"))
 
     const data = {
-      gymId: "gym-01",
+      gymId: "1",
       userId: "user-01",
       userLatitude: -20.66929,
       userLongitude: -40.49702
@@ -58,14 +60,14 @@ describe("Authenticate Use Case",  () => {
 
     await sut.execute(data)
 
-    await expect(sut.execute(data)).rejects.toBeInstanceOf(Error)
+    await expect(sut.execute(data)).rejects.toBeInstanceOf(MaxNumberOfCheckInsError)
   })
 
   it("should be able to check in twice, but in different days", async () => {
     vi.setSystemTime(new Date("2021-01-01 10:00:00"))
 
     const data = {
-      gymId: "gym-01",
+      gymId: "1",
       userId: "user-01",
       userLatitude: -20.66929,
       userLongitude: -40.49702
@@ -99,7 +101,7 @@ describe("Authenticate Use Case",  () => {
       userLongitude: -40.49702
     }
 
-    await expect(sut.execute(data)).rejects.toBeInstanceOf(Error)
+    await expect(sut.execute(data)).rejects.toBeInstanceOf(MaxDistanceError)
   })
 })
 

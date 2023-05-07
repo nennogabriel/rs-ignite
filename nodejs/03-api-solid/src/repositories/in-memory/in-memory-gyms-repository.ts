@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import { CreateGymDTO, GymDTO } from "../dtos/gyms-dto";
 
 export class InMemoryGymsRepository {
@@ -11,18 +12,20 @@ export class InMemoryGymsRepository {
     return gym;
   }
 
-  // async create(data: CreateGymDTO){
-  //   const gym = {
-  //     ...data,
-  //     description: data.description || null,
-  //     phone: data.phone || null,
-  //     id: String(this.items.length + 1),
-  //     created_at: new Date(),
-  //   };
+  async create(data: CreateGymDTO){
+    const gym = {
+      id: String(this.items.length + 1),
+      title: data.title,
+      description: data.description ?? null,
+      phone: data.phone ?? null,
+      latitude: new Prisma.Decimal(data.latitude.toString()),
+      longitude: new Prisma.Decimal(data.longitude.toString()),
+      created_at: new Date(),
+    };
 
-  //   this.items.push(gym);
-  //   return gym;
-  // }
+    this.items.push(gym);
 
+    return gym;
+  }
 
 }
