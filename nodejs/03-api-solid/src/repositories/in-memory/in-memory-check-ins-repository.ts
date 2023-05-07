@@ -1,10 +1,19 @@
+import dayjs from "dayjs";
 import { CheckInDTO, CreateCheckInDTO } from "../dtos/chek-in-dto";
 
 export class InMemoryCheckInsRepository {
   public items: CheckInDTO[] = [];
 
   async findByUserIdOnDate(userId: string, date: Date) {
-    const checkIn = this.items.find((checkIn) => checkIn.user_id === userId);
+    const startOfTheDay = dayjs(date).startOf("date")
+    const endOfTheDay = dayjs(date).endOf("date")
+
+    const checkIn = this.items.find((checkIn) => {
+      const checkInDate = dayjs(checkIn.created_at)
+      const isOnSameDay = checkInDate.isAfter(startOfTheDay) && checkInDate.isBefore(endOfTheDay)
+
+      return checkIn.user_id === userId && isOnSameDay
+    });
     if (!checkIn) {
       return null;
     }
