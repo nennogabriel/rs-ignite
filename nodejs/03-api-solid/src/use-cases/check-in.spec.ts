@@ -20,8 +20,8 @@ describe("Authenticate Use Case",  () => {
       title: "Gym 01",
       description: "",
       phone: "",
-      latitude: new Decimal(10),
-      longitude: new Decimal(10),
+      latitude: new Decimal(-20.66929),
+      longitude: new Decimal(-40.49702),
     })
 
     vi.useFakeTimers()
@@ -37,8 +37,8 @@ describe("Authenticate Use Case",  () => {
     const data = {
       gymId: "gym-01",
       userId: "user-01",
-      userLatitude: 10,
-      userLongitude: 10
+      userLatitude: -20.66929,
+      userLongitude: -40.49702
     }
 
     const { checkIn } = await sut.execute(data)
@@ -52,8 +52,8 @@ describe("Authenticate Use Case",  () => {
     const data = {
       gymId: "gym-01",
       userId: "user-01",
-      userLatitude: 10,
-      userLongitude: 10
+      userLatitude: -20.66929,
+      userLongitude: -40.49702
     }
 
     await sut.execute(data)
@@ -67,8 +67,8 @@ describe("Authenticate Use Case",  () => {
     const data = {
       gymId: "gym-01",
       userId: "user-01",
-      userLatitude: 10,
-      userLongitude: 10
+      userLatitude: -20.66929,
+      userLongitude: -40.49702
     }
 
     await sut.execute(data)
@@ -78,6 +78,28 @@ describe("Authenticate Use Case",  () => {
     const { checkIn } = await sut.execute(data)
 
     expect(checkIn.id).toEqual(expect.any(String))
+  })
+
+  it("should be not be able to check in to distant gym", async () => {
+    vi.setSystemTime(new Date("2021-01-01 10:00:00"))
+
+    gymsRepository.items.push({
+      id: "gym-02",
+      title: "Gym 02",
+      description: "",
+      phone: "",
+      latitude: new Decimal(-20.65175),
+      longitude: new Decimal(-40.47717),
+    })
+
+    const data = {
+      gymId: "gym-02",
+      userId: "user-01",
+      userLatitude: -20.66929,
+      userLongitude: -40.49702
+    }
+
+    await expect(sut.execute(data)).rejects.toBeInstanceOf(Error)
   })
 })
 
