@@ -1,5 +1,4 @@
-import { CreateUserDTO } from "../dtos/user-dto";
-import { UserDTO } from "../dtos/user-dto";
+import { CreateUserDTO, UserDTO } from "../dtos/user-dto";
 
 export class InMemoryUsersRepository {
   public items: UserDTO[] = [];
