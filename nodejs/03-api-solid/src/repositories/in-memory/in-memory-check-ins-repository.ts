@@ -20,6 +20,11 @@ export class InMemoryCheckInsRepository {
     return checkIn;
   }
 
+  async countByUserId(userId: string) {
+    const checkIns = this.items.filter((checkIn) => checkIn.user_id === userId);
+    return checkIns.length;
+  }
+
   async findManyByUserId(userId: string, page: number) {
     const checkIns = this.items.filter((checkIn) => checkIn.user_id === userId)
     .slice((page - 1) * 20, page * 20);
