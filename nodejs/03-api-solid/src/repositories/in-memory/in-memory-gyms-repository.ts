@@ -1,5 +1,7 @@
 import { Prisma } from "@prisma/client";
 import { CreateGymDTO, GymDTO } from "../dtos/gyms-dto";
+import { FindManyNearbyParams } from "../gyms-repository";
+import { getDistanceInMetersBetweenCoordinates } from "@/utils/get-distance-in-meters-between-coordinates";
 
 export class InMemoryGymsRepository {
   public items: GymDTO[] = [];
@@ -18,6 +20,17 @@ export class InMemoryGymsRepository {
       .slice((page - 1) * 20, page * 20);
     return gyms;
   }
+
+  async findManyNearby({ latitude, longitude }: FindManyNearbyParams) {
+    return this.items.filter((gym) => {
+      const distance = getDistanceInMetersBetweenCoordinates(
+        { latitude, longitude },
+        { latitude: gym.latitude.toNumber(), longitude: gym.longitude.toNumber() }
+      )
+      return distance <= 10000
+    })
+  }
+
 
   async create(data: CreateGymDTO){
     const gym = {

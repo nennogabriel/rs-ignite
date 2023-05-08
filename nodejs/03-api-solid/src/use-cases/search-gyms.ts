@@ -1,21 +1,21 @@
 import { GymDTO } from "@/repositories/dtos/gyms-dto"
 import { GymsRepository } from "@/repositories/gyms-repository"
 
-interface SearchGymsUserCaseRequest {
+interface SearchGymsUseCaseRequest {
   query: string
   page: number
 }
 
-interface SearchGymsUserCaseResponse {
+interface SearchGymsUseCaseResponse {
   gyms: GymDTO[]
 }
 
-export class SearchGymsUserCase {
+export class SearchGymsUseCase {
   constructor( private gymRepository: GymsRepository,){}
 
   async execute ({
     query, page,
-  }: SearchGymsUserCaseRequest) : Promise<SearchGymsUserCaseResponse> {
+  }: SearchGymsUseCaseRequest) : Promise<SearchGymsUseCaseResponse> {
 
     const gyms = await this.gymRepository.searchMany(query, page)
 
