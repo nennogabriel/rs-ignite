@@ -10,6 +10,7 @@ export function getDistanceInMetersBetweenCoordinates(
   if (from.latitude === to.latitude && from.longitude === to.longitude) {
     return 0;
   }
+
   const earthRadiusInMeters = 6371000;
   const degreesToRadians = (degrees: number) => (degrees * Math.PI) / 180;
 
