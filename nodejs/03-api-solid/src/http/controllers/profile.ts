@@ -1,6 +1,7 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 
 export async function profile(request: FastifyRequest, reply: FastifyReply) {
- 
-    return reply.status(200).send();
+  request.jwtVerify()
+  console.log(request.user.sub)
+  return reply.status(200).send();
 }
