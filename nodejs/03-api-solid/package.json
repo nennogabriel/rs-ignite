@@ -10,6 +10,7 @@
     "test": "vitest run --dir src/use-cases",
     "pretest:e2e": "npm link ./prisma/vitest-environment-prisma && npm link vitest-environment-prisma",
     "test:e2e": "vitest run --dir src/http",
+    "test:e2e:watch": "vitest --dir src/http",
     "test:watch": "vitest --dir src/use-cases",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui"
@@ -29,9 +30,11 @@
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/node": "^18.16.3",
+    "@types/supertest": "^2.0.12",
     "@vitest/coverage-c8": "^0.31.0",
     "@vitest/ui": "^0.31.0",
     "prisma": "^4.13.0",
+    "supertest": "^6.3.3",
     "tsup": "^6.7.0",
     "tsx": "^3.12.7",
     "typescript": "^5.0.4",
