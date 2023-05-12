@@ -11,7 +11,7 @@ export async function create (request: FastifyRequest, reply: FastifyReply) {
     longitude: z.number().refine(value => value >= -180 && value <= 180),
   })
 
-  const { title, description, phone, latitude, longitude } = createGymBodySchema.parse(request.body)
+  const { title, description, phone, latitude, longitude } = createGymBodySchema.parse(request.query)
 
   const createGymUseCase = makeCreateGymUseCase()
   await createGymUseCase.execute({ title, description, phone, latitude, longitude })
