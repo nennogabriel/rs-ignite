@@ -5,12 +5,9 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
-      defaults:
-        run:
-          working-directory: nodejs/03-api-solid
-
   run-unit-tests:
+    run:
+      working-directory: nodejs/03-api-solid
     name: Run Unit Tests
     runs-on: ubuntu-latest
 
