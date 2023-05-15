@@ -1,11 +1,11 @@
-name: Run Unit Tests On Project 03 Lessons
+name: Run E2E Tests On Project 03 Lessons
 
 on:
   pull_request:
     branches: [ main ]
 
 jobs:
-  run-unit-tests:
+  run-e2e-tests:
     defaults:
       run:
         working-directory: nodejs/03-api-solid
