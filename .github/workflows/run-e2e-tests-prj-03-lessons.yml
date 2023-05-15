@@ -16,7 +16,7 @@ jobs:
       postgres:
         image: bitnami/postgresql
         restart: always
-        environment:
+        env:
           POSTGRES_USER: docker
           POSTGRES_PASSWORD: docker
           POSTGRES_DB: apisolid
@@ -39,7 +39,7 @@ jobs:
 
       - name: Run e2e tests
         run: npm test:e2e
-        environment:
+        env:
           JWT_SECRET: "test-environment"
           DATABASE_URL: "postgresql://docker:docker@localhost:5432/apisolid?schema=public"
 
