@@ -8,13 +8,12 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
   })
 
   const createCheckInBodySchema = z.object({
-    gymId: z.string(),
     latitude: z.number().refine(value => value >= -90 && value <= 90),
     longitude: z.number().refine(value => value >= -180 && value <= 180),
   })
 
   const { gymId } = createCheckInsParamsSchema.parse(request.params)
-  const { latitude, longitude } = createCheckInBodySchema.parse(request.query)
+  const { latitude, longitude } = createCheckInBodySchema.parse(request.body)
 
   const createCheckInUseCase = makeCheckInUseCase()
   await createCheckInUseCase.execute({

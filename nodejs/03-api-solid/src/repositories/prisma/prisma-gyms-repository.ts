@@ -18,14 +18,14 @@ export class PrismaGymsRepository implements GymsRepository {
   async findManyNearby(params: FindManyNearbyParams) {
     const { latitude, longitude } = params;
     // get all gyms within 10000 meters
-    const gyms = await prisma.$queryRaw<GymDTO[]>`
-      SELECT * FROM gyms
-      WHERE ST_Distance_Sphere( ST_MakePoint(${longitude}, ${latitude}), ST_MakePoint(longitude, latitude) ) <= 10000
-    `;
     // const gyms = await prisma.$queryRaw<GymDTO[]>`
-    //   SELECT * from gyms
-    //   WHERE ( 6371 * acos( cos( radians(${latitude}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(${longitude}) ) + sin( radians(${latitude}) ) * sin( radians( latitude ) ) ) ) <= 10
+    //   SELECT * FROM gyms
+    //   WHERE ST_Distance_Sphere( ST_MakePoint(${longitude}, ${latitude}), ST_MakePoint(longitude, latitude) ) <= 10000
     // `;
+    const gyms = await prisma.$queryRaw<GymDTO[]>`
+      SELECT * from gyms
+      WHERE ( 6371 * acos( cos( radians(${latitude}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(${longitude}) ) + sin( radians(${latitude}) ) * sin( radians( latitude ) ) ) ) <= 10
+    `;
 
     return gyms;
   }

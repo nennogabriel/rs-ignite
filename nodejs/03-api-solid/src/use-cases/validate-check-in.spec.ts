@@ -52,6 +52,8 @@ describe("Validate Check In Use Case",  () => {
       user_id: "user-01",
     })
 
+
+
     vi.advanceTimersByTime(1000 * 60 * 21) // 21 minutes
 
     await expect(sut.execute({

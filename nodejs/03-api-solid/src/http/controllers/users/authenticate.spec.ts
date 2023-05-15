@@ -7,7 +7,7 @@ describe('Authenticate (e2e)', async () => {
 
   beforeAll(async () => {
     await app.ready()
-  })
+  }, 25000)
 
   afterAll(async () => {
     await app.close()
