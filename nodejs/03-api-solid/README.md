@@ -1,5 +1,4 @@
 # App
-
 Gympass style app
 
 ## RFs (Requisitos Funcionais)
@@ -23,7 +22,6 @@ Gympass style app
 - [x] O checkin só pode ser validade até 20 minutos após criado;
 - [x] O checkin só pode ser validade por administradores;
 - [x] A academia só pode ser cadastrada por administradores;
-
 
 ## RNFs (Requisitos Não Funcionais)
 
