@@ -15,7 +15,6 @@ jobs:
     services:
       postgres:
         image: bitnami/postgresql
-        restart: always
         env:
           POSTGRES_USER: docker
           POSTGRES_PASSWORD: docker
