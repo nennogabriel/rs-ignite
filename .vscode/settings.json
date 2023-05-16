@@ -18,11 +18,8 @@
     "nlw/spacet[!i]*/**": true,
     "nlw/spaceti[!m]*/**": true,
     "nlw/spacetim[!e]*/**": true,
-    "nlw/spacetime/[!s]*/**": true,
-    "nlw/spacetime/s[!e]*/**": true,
-    "nlw/spacetime/se[!r]*/**": true,
-    "nlw/spacetime/ser[!v]*/**": true,
-    "nlw/spacetime/serv[!e]*/**": true,
-    "nlw/spacetime/serve[!r]*/**": true
+    "nlw/spacetime/[!w]*/**": true,
+    "nlw/spacetime/w[!e]*/**": true,
+    "nlw/spacetime/we[!b]*/**": true
   }
 }
