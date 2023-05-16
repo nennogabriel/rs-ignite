@@ -5,6 +5,24 @@
     "**/.hg": true,
     "**/CVS": true,
     "**/.DS_Store": true,
-    "**/Thumbs.db": true
+    "**/Thumbs.db": true,
+    "[!n]*/**": true,
+    "n[!l]*/**": true,
+    "nl[!w]*/**": true,
+    "nlw/[!s]*/**": true,
+    "nlw/s[!p]*/**": true,
+    "nlw/sp[!a]*/**": true,
+    "nlw/spa[!c]*/**": true,
+    "nlw/spac[!e]*/**": true,
+    "nlw/space[!t]*/**": true,
+    "nlw/spacet[!i]*/**": true,
+    "nlw/spaceti[!m]*/**": true,
+    "nlw/spacetim[!e]*/**": true,
+    "nlw/spacetime/[!s]*/**": true,
+    "nlw/spacetime/s[!e]*/**": true,
+    "nlw/spacetime/se[!r]*/**": true,
+    "nlw/spacetime/ser[!v]*/**": true,
+    "nlw/spacetime/serv[!e]*/**": true,
+    "nlw/spacetime/serve[!r]*/**": true
   }
 }
